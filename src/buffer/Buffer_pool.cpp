@@ -16,7 +16,7 @@ Buffer_pool* Buffer_pool::get_pool(){
                      std::cout<<" New Buffer pool created  "<< std::endl;
                   }
                else{
-                     std::cout<<"Moron this is singleton  " << std::endl;
+                     std::cout<<" This is singleton  " << std::endl;
                     }
                pool_s.unlock();
                return Buffer_pool::instance;
