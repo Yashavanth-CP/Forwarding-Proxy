@@ -22,16 +22,80 @@ template<class Type>
 class Dlist{
         
             public:
-                   void add(Node<Type>* n);
+                   void add(Type n);
                    Type* get_front();
                    bool Is_empty();
-                   Node<Type>* pop();
+                   Type pop();
                    Dlist();
                    ~Dlist();
                    
            private:
                    Node<Type>* head;
 };
+
+
+template<class Type>
+Node<Type>::Node(Type d){
+                 data = d;
+                 next = NULL;
+                 prev = NULL;
+}
+
+template<class Type>
+Node<Type>::~Node(){
+ }
+
+
+template<class Type>
+bool Dlist<Type>::Is_empty(){
+              return (head == NULL);
+}
+
+template<class Type>
+Dlist<Type>::Dlist(){
+                    head = NULL;
+}
+
+template<class Type>
+Dlist<Type>::~Dlist(){
+           Node<Type>* toDel; 
+           while(head != NULL){
+                 toDel = head;
+                 head = head ->next;
+                 if(head != NULL)
+                 head->prev = NULL;
+                 delete toDel;
+           }
+
+}    
+
+template<class Type>
+void Dlist<Type>::add(Type n){
+                  Node<Type>* toAdd = new Node<Type>(n); 
+                 if(head == NULL){
+                    head = toAdd;
+                    }
+                 else{
+                     toAdd->next = head;
+                     head->prev = toAdd;
+                     head = toAdd;
+                   }
+}
+
+template<class Type>
+Type  Dlist<Type>::pop(){
+                
+                if(head ==NULL)
+                   return -1;
+                else{
+                     Node<Type>* toRet = head;
+                     head = head->next;
+                     if(head != NULL)
+                        head->prev = NULL;
+                     toRet->next = NULL;
+                     return toRet->data;
+                  }
+ }
 
 #endif                        
                                 
